@@ -1,13 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36623.8 d17.14
+VisualStudioVersion = 17.14.36623.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocopodo.WebApp", "OcopodoWeb\Ocopodo.WebApp.csproj", "{F10EFFBE-F2F9-40A9-B2D9-E216B31FFCC8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocopodo.Data", "Ocopodo.Data\Ocopodo.Data.csproj", "{40964F78-FD24-4F40-9517-3208AE2EDFAA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocopodo.Application", "Ocopodo.Application\Ocopodo.Application.csproj", "{E047369E-D64A-4A3C-BF1E-C2170E864CA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocopodo.ViewModels", "ViewModels\Ocopodo.ViewModels.csproj", "{36F1D754-E547-403F-A246-7753FF25D9A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocopodo.BackEndAPI", "Ocopodo.BackEndAPI\Ocopodo.BackEndAPI.csproj", "{359F2B0F-9023-42B4-8146-14F38509776A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocopodo.Utilities", "Ocopodo.Utilities\Ocopodo.Utilities.csproj", "{34C4E062-CE85-4011-95E4-254B6C45ECA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +33,18 @@ Global
 		{E047369E-D64A-4A3C-BF1E-C2170E864CA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E047369E-D64A-4A3C-BF1E-C2170E864CA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E047369E-D64A-4A3C-BF1E-C2170E864CA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36F1D754-E547-403F-A246-7753FF25D9A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36F1D754-E547-403F-A246-7753FF25D9A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36F1D754-E547-403F-A246-7753FF25D9A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36F1D754-E547-403F-A246-7753FF25D9A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{359F2B0F-9023-42B4-8146-14F38509776A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{359F2B0F-9023-42B4-8146-14F38509776A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{359F2B0F-9023-42B4-8146-14F38509776A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{359F2B0F-9023-42B4-8146-14F38509776A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34C4E062-CE85-4011-95E4-254B6C45ECA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34C4E062-CE85-4011-95E4-254B6C45ECA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34C4E062-CE85-4011-95E4-254B6C45ECA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34C4E062-CE85-4011-95E4-254B6C45ECA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -17,6 +17,7 @@ namespace Ocopodo.Data.Entities
         public string Content { get; set; }
         public string ThumbnailUrl { get; set; }
         public Status Status { get; set; }
+        public int ViewCount { set; get; }
         public int? CategoryId { get; set; }
         public BlogCategory Category { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

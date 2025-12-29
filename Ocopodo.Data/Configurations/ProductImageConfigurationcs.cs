@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Ocopodo.Data.Configurations
 {
-    public class ProductImageConfigurationcs
+    public class ProductImageConfigurationcs : IEntityTypeConfiguration<ProductImage>
     {
         public void Configure(EntityTypeBuilder<ProductImage> builder)
         {

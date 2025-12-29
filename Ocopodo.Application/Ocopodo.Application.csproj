@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+	  <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ocopodo.Data\Ocopodo.Data.csproj" />
+    <ProjectReference Include="..\ViewModels\Ocopodo.ViewModels.csproj" />
+  </ItemGroup>
+
 </Project>
