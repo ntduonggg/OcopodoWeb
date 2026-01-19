@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using Ocopodo.Application.Catalog.Products;
 using Ocopodo.Application.Common;
 using Ocopodo.Data.EF;
@@ -12,8 +13,15 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<OcopodoDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString(SystemConstant.MainConnectionStringName)));
 
+//Add service
 builder.Services.AddTransient<IStorageService, FileStorageService>();
 builder.Services.AddTransient<IProductService, ProductService>();
+
+//Swagger
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Ocopodo BackEndAPI", Version = "v1" } );
+});
 
 var app = builder.Build();
 
@@ -29,6 +37,13 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
+
+//Swagger
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Ocopodo BackEndAPI V1");
+});
 
 app.MapStaticAssets();
 
