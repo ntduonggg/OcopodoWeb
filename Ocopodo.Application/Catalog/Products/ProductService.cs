@@ -31,34 +31,35 @@ namespace Ocopodo.Application.Catalog.Products
             var product = new Product()
             {
                 Name = request.Name,
+                Slug = request.Name.Replace(" ", "-").ToLower(),
                 Description = request.Description,
                 Price = request.Price,
                 Status = Data.Enums.Status.Active,
                 ViewCount = 0,
                 CreatedAt = DateTime.Now,
+                CategoryId = request.CategoryId,
                 UpdatedAt = DateTime.Now,
+                MainImageUrl = this.SaveFile(request.MainImageUrl).Result
             };
-            if (request.MainImageUrl != null)
-            {
-                product.MainImageUrl = await this.SaveFile(request.MainImageUrl);
-                //product.Images = new List<ProductImage>()
-                //{
-                //    new ProductImage()
-                //    {
-                //        ImageUrl = await this.SaveFile(request.MainImageUrl),
-                //        SortOrder = 1
-                //    }
-                //};
-            }
             _context.Products.Add(product);
+            await _context.SaveChangesAsync();
+
+            var image = new ProductImage()
+            {
+                ImageUrl = this.SaveFile(request.MainImageUrl).Result,
+                IsDefault = true,
+                ProductId = product.Id,
+                SortOrder = 1
+            };
+            _context.ProductImages.Add(image);
             await _context.SaveChangesAsync();
             return product.Id;
         }
 
-        public async Task<int> Update(ProductUpdateRequest request)
+        public async Task<int> Update(int productId, ProductUpdateRequest request)
         {
             var product = await _context.Products
-            .FirstOrDefaultAsync(x => x.Id == request.Id);
+            .FirstOrDefaultAsync(x => x.Id == productId);
 
             if (product == null)
                 throw new Exception("Product not found");
@@ -83,7 +84,7 @@ namespace Ocopodo.Application.Catalog.Products
 
         public async Task<int> Delete(int productId)
         {
-            var product = _context.Products.FindAsync(productId);
+            var product = await _context.Products.FindAsync(productId);
             if (product == null) throw new Exception($"Cannot find a product with id: {productId}");
 
             var images = _context.ProductImages.Where(i => i.ProductId == productId);
@@ -91,8 +92,7 @@ namespace Ocopodo.Application.Catalog.Products
             {
                 await _storageService.DeleteFileAsync(image.ImageUrl);
             }
-
-            _context.Products.Remove(await product);
+            _context.Products.Remove(product);
             return await _context.SaveChangesAsync();
 
         }
@@ -165,11 +165,14 @@ namespace Ocopodo.Application.Catalog.Products
 
         public async Task<int> AddImage(int productId, ProductImageCreateRequest request)
         {
+            var sortOrder = await _context.ProductImages
+                .Where(i => i.ProductId == productId)
+                .CountAsync();
             var productImage = new ProductImage()
             {
                 IsDefault = request.IsDefault,
                 ProductId = productId,
-                SortOrder = request.SortOrder
+                SortOrder = sortOrder + 1
             };
 
             if (request.ImageFile != null)
@@ -206,7 +209,7 @@ namespace Ocopodo.Application.Catalog.Products
 
         public async Task<List<ProductImageViewModel>> GetListImage(int productId)
         {
-            return await _context.ProductImages.Where(x => x.ProductId == productId)
+            var listimages = await _context.ProductImages.Where(x => x.ProductId == productId)
                 .Select(i => new ProductImageViewModel()
                 {
                     Id = i.Id,
@@ -215,6 +218,8 @@ namespace Ocopodo.Application.Catalog.Products
                     ProductId = i.ProductId,
                     SortOrder = i.SortOrder
                 }).ToListAsync();
+
+            return listimages;
         }
 
         public async Task<ProductImageViewModel> GetImageById(int imageId)
